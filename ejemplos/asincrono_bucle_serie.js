@@ -13,7 +13,7 @@ function escribeTras2Segundos(texto, callback) {
 // bucle asíncrono en serie
 // llamar a una función n veces en serie
 function serie(n, fn, callbackFinalizacion) {
-  if (n == 0) {
+  if (n === 0) {
     callbackFinalizacion();
     return;
   }

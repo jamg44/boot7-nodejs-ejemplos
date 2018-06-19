@@ -1,5 +1,7 @@
 'use strict';
 
+const async = require('async');
+
 console.log('empiezo');
 
 // funcion que escriba un texto en la consola tras 2 segundos
@@ -13,7 +15,7 @@ function escribeTras2Segundos(texto, callback) {
 // bucle asíncrono en serie
 // llamar a una función en serie copn cada elemento de un array
 function serie(arr, fn, callbackFinalizacion) {
-  if (arr.length == 0) {
+  if (arr.length === 0) {
     callbackFinalizacion();
     return;
   }
@@ -22,6 +24,10 @@ function serie(arr, fn, callbackFinalizacion) {
   });
 }
 
-serie([1, 2, 'tres', 4, 5], escribeTras2Segundos, function() {
+/*serie([1, 2, 'tres', 4, 5], escribeTras2Segundos, function() {
+  console.log('fin');
+});*/
+
+async.concatSeries([1, 2, 'tres', 4, 5], escribeTras2Segundos, function() {
   console.log('fin');
 });

@@ -7,5 +7,19 @@
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
+    <p>Apellido <%= apellido %>
+
+    <h2>Incluyendo una condición</h2>
+    <% if (condicion.estado) { %>
+      <p><%= condicion.segundo %> es par</p>
+    <% } else { %>
+      <p><%= condicion.segundo %> es impar</p>
+    <% } %>
+
+    <h2>Incluyendo un bucle</h2>
+    <% users.forEach(user => { %>
+      <p> <%= user.name + ' ' + user.age %> </p>
+    <% }) %>
+
   </body>
 </html>

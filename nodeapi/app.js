@@ -4,23 +4,33 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+app.use((req, res, next) => {
+  // En un middleware tengo que:
+  // - responder
+  //res.send('ok');
+  // - o llamar a next()
+  next();
+  //next(new Error('esto va mal'));
+});
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+//app.use('/media', express.static('d:\media'));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+/**
+ * Rutas de mi aplicación web
+ */
+app.use('/',      require('./routes/index'));
+app.use('/users', require('./routes/users'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

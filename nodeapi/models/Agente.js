@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const agenteSchema = mongoose.Schema({
   name: String,
   age: Number
+//}, { collection: 'Agente'});
 });
 
 // creamos el modelo

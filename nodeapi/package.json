@@ -4,16 +4,19 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
+    "cluster": "node ./bin/cluster",
     "dev": "cross-env DEBUG=nodeapi:* nodemon ./bin/www",
     "meloinvento": "echo que guai"
   },
   "dependencies": {
+    "basic-auth": "^2.0.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "ejs": "~2.5.7",
     "express": "~4.16.0",
     "express-validator": "^5.2.0",
     "http-errors": "~1.6.2",
+    "jsonwebtoken": "^8.3.0",
     "mongoose": "^5.1.7",
     "morgan": "~1.9.0"
   },

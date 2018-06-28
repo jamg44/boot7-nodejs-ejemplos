@@ -34,6 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
  * Rutas de mi API
  */
 app.use('/apiv1/agentes', require('./routes/apiv1/agentes'));
+app.use('/apiv1/usuarios', require('./routes/apiv1/usuarios'));
 
 app.locals.title = 'NodeAPI';
 

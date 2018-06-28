@@ -3,18 +3,43 @@ const router = express.Router();
 
 const Agente = require('../../models/Agente');
 
+const basicAuth = require('../../lib/basicAuth');
+const jwtAuth = require('../../lib/jwtAuth');
+
+// router.use(basicAuth('admin', '1234')); // para que todo el router pida autenticación
+
 /**
  * GET /
  * Recupera una lista de agentes
  */
-router.get('/', (req, res, next) => {
-  Agente.find({}).exec((err, agentes) => {
-    if (err) {
-      next(err);
-      return;
+router.get('/', jwtAuth(), async (req, res, next) => {
+  try {
+    // cual es el usuario?
+    console.log('el usuario autenticado es:', req.user_id);
+    
+    const name = req.query.name;
+    const age = req.query.age;
+    const skip = parseInt(req.query.skip);
+    const limit = parseInt(req.query.limit);
+    const fields = req.query.fields;
+    const sort = req.query.sort;
+
+    // crear un filtro vacio
+    const filter = {};
+
+    if (name) { // solo añado el filtro cuando tengo que filtrar
+      filter.name = name;
     }
+
+    if (age) {
+      filter.age = age;
+    }
+
+    const agentes = await Agente.list(filter, skip, limit, fields, sort); // await espera a se resuelva la promesa y me da el resultado
     res.json({ success: true, result: agentes });
-  });
+  } catch(err) {
+    next(err);    
+  }
 });
 
 /**
